@@ -1,0 +1,61 @@
+setcps(120/60/4)
+
+hush
+
+d9
+$stack[
+  n "~ ~ 0 ~" #s "ade:1" #legato 0.35 #gain 1.2
+  ,n "~ 0*2 ~ 0*3 ~" #s "ades3:1 ades3:7" #gain 0.82
+]
+
+d10
+$stack[
+  n "~ 0 ~ ~" #s "auto:1" #gain 1.2
+  ,n "0/2" #s "auto:3" #gain 0.82
+  ,n "0/2" #s "auto:7" #gain 0.82
+  ,n "~ 0 ~ [0 0] ~" #s "bass3:6 bass3:7" #shape 0.5 #legato "0.7 1"
+  ,n "~ ~ ~ <0 [~ 0]>" #s "control:1"
+  ,n "0/4" #s "control:0"
+]
+
+d11
+$stack[
+  --every 3 (fast 3)
+  n "0*4"
+  -- n "0!3 [0](5,11)"
+  #s "gabba:5"
+  #gain "1.25"
+  ,n "0 ~ ~ <[~ 0] ~>"
+  #s "auto:1"
+  #gain "1.25 0.75"
+]
+
+d12
+-- $rev
+$n "[~ 0 ~] -2 [3 7] ~"
+#s "superfm"
+#octave 3
+#legato 0.5 -- 0.25
+#gain 5
+
+d13
+$n "{<c4, ds4, g4> ,<c4, ds4, as4> ~ , ~ ,[~ <f4, ds4>]}"
+#s "supergrind"
+#legato 0.2 -- 0.2 0.75 1.2
+#lpf 1000
+#gain (range 0.85 1.25 $sine) |+ 12 -- 2
+
+--- play free
+d14
+$jux (every 2 (slow 3) . rev)
+$struct "t(5,18, <0 3>)"
+-- $every 2 (0.125 <~)
+$n "<d5'harmonicMinor b4'melodicMinor e5'minor7>" #s "supermandolin" # room 1.6 # sz 0.9
+ #delaytime 1.4 #delayfb 4
+ #sustain 1.3
+ #octave 3
+ #gain 0.75
+ #orbit 2
+
+
+hush

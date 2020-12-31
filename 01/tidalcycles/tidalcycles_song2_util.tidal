@@ -1,0 +1,99 @@
+setcps(120/60/4)
+
+----------------------------------------
+hush
+
+-- contidion feedback
+
+d1$stack[
+  every 3 (hurry 2) . stut 3 2 (1.5)
+  $whenmod 5 4 (#delaytime (range 0.01 0.3 $slow 4 sine))
+  $whenmod 6 5 (slow 4)
+  $n "[0 ~ ~ 0] ~ [0 <[0 0] 0>]>"
+  #s "gabba:1 kicklinn" #gain 2
+  #delayfb 5 #orbit 1
+  ,n "[~ [0 <[0 ~]> ~] ~] ~ ~ [<0 ~> ~]"
+  #s "sn:1" #gain "1"
+  ,whenmod 3 2 (stut 3 2 1) . (jux (rev))
+  $n "~ 0 ~ 0 ~" #nudge (range 0.01 0.51 sine)
+  #s "glitch:1" #legato 0.2 #gain 2
+]
+
+d1 silence
+
+d2
+$struct "t(3,5)"
+$s "gabba:7"
+
+d2 silence
+
+d3
+$whenmod 3 2 (stut 3 2 1) . (jux (rev)) . every 4 (fast 2)
+$struct ("1 [0 1] 0 1 [0 1] 0 1 [0 1]")
+$s "bass1:2" #legato 0.25
+
+d4 silence
+
+d4
+$whenmod 6 2 (slow 5)
+$whenmod 5 1 (stut 3 2 2)
+$struct ("1 1 [0 1 0 0] [0 1 0 1]")
+$s "glitch:2" #legato 0.25
+#room 2 #orbit 2
+#gain 0.5
+
+hush
+
+d5
+-- $struct ("0 1")
+$struct ("1 0 1")
+$whenmod 3 1 (#room 3)
+$whenmod 4 2 (#delaytime 3)
+$s "superfm"
+#note "ds'5 g4'min"
+#legato 0.25
+#orbit 3
+
+d6
+-- $every 3 (rev) . (slow 3)
+$n "[~ 0 ~] [3 7] <12, -2> ~"
+#s "superfm"
+#octave 3
+#legato 0.25 -- 0.25
+#gain 5
+
+
+d7
+-- $(0.5 <~)
+$arpeggiate
+$s "supersiren"
+-- $s "supersaw(3,9)/3"
+-- #note "<[4,12] [2,9]>"
+#note "<[3,12] [7,12]>"
+#lpf (range 200 2000 $slow 6 $rand)
+#resonance "0.13"
+#octave 2
+#legato 0.8
+#gain 0.75
+|+|note "{12 -7 7 5 -12 -5}"
+#pan (range 0 1 $slow 12 $rand)
+
+d8
+-- $stut 5 3 0.5
+$n "<c4'minor> [<c4 , a4> ~ [<c3, g4>]]/2"
+#s "superpiano"
+#gain "1 0.9 0.75"
+#octave 6
+#cutoff 1200
+#sustain 5
+-- #attack 1
+-- #legato 3
+
+d9
+$ "supersaw" #n "{<c4, a4> ,<c4, d4, a4> ~ ,[~ <f4, d4>]}"
+#octave 2
+#gain 3
+#cutoff (range 1000 11200 $rand)
+#resonance 0.34
+
+hush

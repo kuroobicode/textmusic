@@ -1,0 +1,109 @@
+setcps(120/60/4)
+
+
+----------------------------------------
+hush
+
+d1$stack[
+  n "[0 <[0 0] 0>][0 ~ ~ 0] ~>"
+  #s "gabba:1" #gain 2
+  ,n "[~ [0 <[0 ~]> ~] ~] ~ ~ [<0 ~> ~]"
+  #s "sn:1" #gain "1"
+  ,whenmod 3 2 (stut 3 2 1) . (jux (rev))
+  $n "~ 0 ~ 0 ~" #nudge (range 0.01 0.51 sine)
+  #s "glitch:1" #legato 0.2 #gain 2
+]
+
+d2 silence
+
+d2$stack[
+  n "[~ 0 ~ ~] ~ ~ ~"
+  #s "incoming:2" #gain 1 #legato 0.5
+  ,n "[~ 0] ~ ~"
+  #s "cosmicg:2" #delay 0.25 #delayfb 1
+  #legato 0.01
+  #gain 0.1
+  ,sometimesBy 0.5 (#rev 2)
+  .every 3 (0.25 <~)
+  $n "[~ 0]"
+  #s "less:0"
+  #gain 2
+]
+
+-- fx
+d3$stack[
+  n "[0 ~ 0 ~][0 ~ ~ 0]"
+  #s "dr_few:0" #gain 0
+  ,n "~ 0 ~ 0 ~ ~ 0"
+  #s "perc:1" #gain 4
+  ,n "~  ~ ~ [0 ~]"
+  #s "stab:9" #gain 1
+  ,n "[~ ~ [0 0]] ~ ~ [<0 ~> ~]"
+  #s "stomp:1" #gain "[3 [0.75 0.5]] 2 0 1"
+]
+
+d3 silence
+
+d3$stack[
+  every 2 (stut 2 1 0.5)
+  $n "[0 ~ 0 ~][0 ~ ~ 0]"
+  #s "incoming:3" #gain 1
+]
+
+d4$stack[
+  n "0 ~ 0 0? 0"
+  #s "sundance:5" #gain 1 #legato 0.5
+]
+
+d6$stack[
+ n "[<c3, f3, g3> <d3,a3,cs4>]/3"
+ #s "superfm"
+ #octave 6
+ ,every 4 (slow "2 4")
+ .whenmod 4 2 (stut 1 0.5 0.25)
+ $n "[~ ~ ~ [~ <d4,a4,cs5>]]/3"
+ #s "superfm"
+ #octave 7
+ #legato 0.125
+]
+
+d10$stack[
+ n "[0 0 0 0]*4"
+ #s "sn:0"
+ ,whenmod 3 2 (fast 3)
+ .every 3 (rev)
+ $n "[~ 0 ~ 0 <0 [0*3]2> ]*4"
+ #s "drum"
+]
+
+-- chop chord
+d11$stack[
+  every 3 (superimpose (fast 2))
+  .every 2 (jux rev)
+  $n "~ <<d3,a3> [~ <a3,cs4>]>"
+  #s "supersiren"
+  #legato "0.175 0.35"
+  #nudge 1
+  #octave 4
+  #gain 2
+]
+
+d12$stack[
+  n "<[<f3,c4>] [<a4,d5> ~ ~ ~]>"
+  #s "superchip"
+  #legato 6
+  #octave 4
+  #hpf (range 1000 3000 $sine)
+]
+
+d13
+$stack[
+  --slow 2
+  n "[~ 0 ~] -2 [3 7] ~"
+  #s "superfm"
+  #octave 3
+  #legato 0.5 -- 0.25
+  #gain 5
+]
+
+hush
